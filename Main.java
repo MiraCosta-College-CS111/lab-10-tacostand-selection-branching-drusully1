@@ -67,18 +67,27 @@ public class Main
 		numTacosOrdered = UtilityBelt.readInt("Enter number of tacos you want> ", 1, 50);
 
 		//CALCULATION + OUTPUT SECTION
+		Main.printConfirmation(option, numTacosOrdered);
 		TacoStand.updateTotalFunds(option, numTacosOrdered);
-		Main.printConfirmation(numTacosOrdered);
 	}
 
 	/**
 	 * Prints confirmation message that varies based on number of tacos in order
 	 * 
-	 * @param numTacos
+	 * @param option option of food from tacoStand
+	 * @param numTacos number of tacos purchased
 	 */
-	public static void printConfirmation(int numTacos) //TODO: upgrade per documentation
+	public static void printConfirmation(int option,int numTacos) //TODO: upgrade per documentation
 	{
+		if (!TacoStand.areTacosAvailable(option, numTacos)) {
+			System.out.println("We don't have that many tacos, sorry! Try again :(");
+			return;
+		}
+
 		System.out.println("Here you go, buen provecho!");
-		System.out.println("🌮");
+		for (int i = 0; i < numTacos; i++) {
+			System.out.print("🌮");
+		}
+		System.out.println("\n");
 	}
 }
